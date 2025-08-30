@@ -13,10 +13,10 @@
     body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0;background:var(--bg);color:#0f172a;padding:12px}
     h2{margin:0 0 12px;font-size:1.32rem;color:#1d4ed8;text-align:center}
     h3{margin:0 0 8px;font-size:1.06rem;color:#1d4ed8;display:flex;align-items:center;gap:12px}
-    .card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:12px;box-shadow:0 2px 6px rgba(0,0,0,.04)}
+    .card{background:#fff;border:1px solid var(--blue);border-radius:12px;padding:12px;margin-bottom:12px;box-shadow:0 2px 6px rgba(0,0,0,.04)}
     .row{display:flex;gap:12px;flex-wrap:wrap}
-    .ibox{border:2px solid var(--blue);border-radius:10px;padding:10px;background:#f9fafb;min-width:140px;flex:1}
-    .ibox label{display:block;font-size:.92rem;margin-bottom:4px;color:var(--blue)}
+    .ibox{border:1px solid var(--border);border-radius:10px;padding:10px;background:#f9fafb;min-width:140px;flex:1}
+    .ibox label{display:block;font-size:.92rem;margin-bottom:4px;color:#374151}
     .ibox input[type=number], .ibox select{width:100%;padding:10px;font-size:1rem;border:1px solid var(--border);border-radius:8px;background:#fff}
     .ibox input:focus, .ibox select:focus{outline:none;border-color:var(--blue)}
     .hint{font-size:.8rem;color:var(--muted)}
@@ -26,7 +26,7 @@
     .pill.active{background:var(--blue);color:#fff;border-color:var(--blue)}
     .slider-wrap{display:flex;align-items:center;gap:10px}
     input[type=range]{width:100%}
-    .big{font-weight:700;color:var(--blue)}
+    .big{font-weight:700;color:#111827}
     .small{font-size:.82rem;color:var(--muted)}
     .split{height:1px;background:var(--border);margin:12px 0}
   </style>
@@ -47,7 +47,7 @@
 
   <!-- 2) 탈수 (선택입력) -->
   <div class="card">
-    <h3>💧 탈수 <span class="small">(선택입력)</span>
+    <h3>💧 탈수교정 <span class="small">(선택입력)</span>
       <label style="display:flex;align-items:center;gap:6px;font-weight:normal;font-size:.9rem">
         <input id="noDehy" type="checkbox" checked>
         <span>탈수 없음</span>
@@ -63,12 +63,12 @@
         <div class="hint">결핍량 = 체중 × (%/100) × 1000</div>
       </div>
       <div class="ibox" style="min-width:260px">
-        <label>보충 시간</label>
+        <label>교정 시간</label>
         <div class="pillbar" id="rtBtns">
           <div class="pill" data-h="6">6 h</div>
-          <div class="pill active" data-h="12">12 h</div>
+          <div class="pill" data-h="12">12 h</div>
           <div class="pill" data-h="18">18 h</div>
-          <div class="pill" data-h="24">24 h</div>
+          <div class="pill active" data-h="24">24 h</div>
         </div>
         <div class="hint">버튼 탭으로 보충시간 선택</div>
       </div>
@@ -80,7 +80,7 @@
         <div id="deficit" class="big">-</div>
       </div>
       <div class="ibox">
-        <label>시간당 결핍 보충속도 (mL/h)</label>
+        <label>교정속도 (mL/h)</label>
         <div id="deficitHr" class="big">-</div>
       </div>
     </div>
@@ -88,7 +88,7 @@
     <!-- 탈수율 가이드: 기본 닫힘 -->
     <details style="margin-top:10px">
       <summary style="cursor:pointer;color:#374151;font-weight:400;font-size:0.9rem">
-        ▶ 신체검사 상 추정 탈수율 가이드 (열기)
+        신체검사 상 추정 탈수율 가이드 (열기)
       </summary>
       <div class="note" style="margin-top:8px">
         <ul style="margin:6px 0 0 18px">
@@ -120,15 +120,15 @@
   </div>
 
   <!-- 4) 지속손실 (선택입력) -->
-  <div class="card">
-    <h3>➕ 지속 손실 <span class="small">(선택입력, mL/h)</span></h3>
-    <div class="row">
+  <details class="card">
+    <summary style="cursor:pointer;color:#1d4ed8;font-weight:500">지속 손실 (선택입력, mL/h)</summary>
+    <div class="row" style="margin-top:10px">
       <div class="ibox" style="max-width:220px">
         <label for="ongoing">지속손실 (mL/h)</label>
         <input id="ongoing" type="number" step="1" placeholder="없으면 비워두기" value="0">
       </div>
     </div>
-  </div>
+  </details>
 
   <!-- 5) 결과 -->
   <div class="card">
@@ -156,7 +156,7 @@
   const maint=$('maint'), ongoing=$('ongoing');
   const rateInit=$('rateInit'), rateAfter=$('rateAfter');
 
-  let replH = 12;
+  let replH = 24;
   rtBtns.querySelectorAll('.pill').forEach(p=>{
     p.addEventListener('click',()=>{
       rtBtns.querySelectorAll('.pill').forEach(x=>x.classList.remove('active'));
@@ -196,7 +196,7 @@
 
     const rInit = m + deficitPerHr + on;
     const rAfter = m + on;
-    rateInit.textContent = fmt(rInit,1);
+    rateInit.textContent = fmt(rInit,1) + ` (${replH}h)`;
     rateAfter.textContent = fmt(rAfter,1);
   }
 
@@ -208,5 +208,3 @@
 </script>
 </body>
 </html>
-
-
