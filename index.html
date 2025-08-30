@@ -11,9 +11,9 @@
     }
     *{box-sizing:border-box}
     body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0;background:var(--bg);color:#0f172a;padding:12px}
-    h2{margin:0 0 12px;font-size:1.32rem;color:var(--blue);text-align:center}
-    h3{margin:0 0 8px;font-size:1.06rem;color:var(--blue);display:flex;align-items:center;gap:12px}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:12px;box-shadow:0 2px 6px rgba(0,0,0,.04)}
+    h2{margin:0 0 12px;font-size:1.32rem;color:#1d4ed8;text-align:center}
+    h3{margin:0 0 8px;font-size:1.06rem;color:#1d4ed8;display:flex;align-items:center;gap:12px}
+    .card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:12px;box-shadow:0 2px 6px rgba(0,0,0,.04)}
     .row{display:flex;gap:12px;flex-wrap:wrap}
     .ibox{border:2px solid var(--blue);border-radius:10px;padding:10px;background:#f9fafb;min-width:140px;flex:1}
     .ibox label{display:block;font-size:.92rem;margin-bottom:4px;color:var(--blue)}
@@ -36,11 +36,11 @@
 
   <!-- 1) 환자 & 체중 -->
   <div class="card">
-    <h3>🐾 환자 & 체중</h3>
+    <h3>🐾 체중</h3>
     <div class="row">
       <div class="ibox" style="max-width:220px">
         <label for="bw">체중 (kg)</label>
-        <input id="bw" type="number" step="0.1" placeholder="예: 4.0" value="4.0">
+        <input id="bw" type="number" step="0.1" placeholder="체중 (필수 입력)" onfocus="this.placeholder=''" onblur="if(this.value==''){this.placeholder='체중 (필수 입력)'}">
       </div>
     </div>
   </div>
@@ -87,17 +87,17 @@
 
     <!-- 탈수율 가이드: 기본 닫힘 -->
     <details style="margin-top:10px">
-      <summary style="cursor:pointer;color:#1d4ed8;font-weight:600">
-        신체검사 상 추정 탈수율 가이드 (펼치기/접기)
+      <summary style="cursor:pointer;color:#374151;font-weight:400;font-size:0.9rem">
+        ▶ 신체검사 상 추정 탈수율 가이드 (열기)
       </summary>
       <div class="note" style="margin-top:8px">
         <ul style="margin:6px 0 0 18px">
-          <li><strong>&lt;5%</strong> — 임상적으로 감지 어려움</li>
-          <li><strong>5~6%</strong> — 피부 긴장도 약간 변화</li>
-          <li><strong>6~8%</strong> — 피부 긴장도 경미하게 감소, 점막 건조</li>
-          <li><strong>8~10%</strong> — 피부 긴장도 명확히 감소, 안구 함몰</li>
-          <li><strong>10~12%</strong> — 피부 탄력 거의 소실로 지속적 텐팅, 각막 혼탁, 저혈량증 소견</li>
-          <li><strong>&gt;12%</strong> — 저혈량성 쇼크, 생명 위협 가능</li>
+          <li><strong>&lt;5%</strong> — <strong>임상적으로 감지 어려움</strong></li>
+          <li><strong>5~6%</strong> — 피부 긴장도 <strong>약간 변화</strong></li>
+          <li><strong>6~8%</strong> — 피부 긴장도 경미하게 감소, <strong>점막 건조</strong></li>
+          <li><strong>8~10%</strong> — 피부 긴장도 <strong>명확히 감소</strong>, <strong>안구 함몰</strong></li>
+          <li><strong>10~12%</strong> — 피부 탄력 <strong>거의 소실</strong>로 <strong>지속적 텐팅</strong>, <strong>각막 혼탁</strong>, <strong>저혈량증 소견</strong></li>
+          <li><strong>&gt;12%</strong> — <strong>저혈량성 쇼크</strong>, <strong>생명 위협</strong> 가능</li>
         </ul>
         <div style="margin-top:8px">
           <em>참고:</em> 임상 소견과 실제 탈수율의 상관에는 개인차가 커서 이 표는 <strong>추정치</strong>입니다.
@@ -110,7 +110,7 @@
   <!-- 3) 유지수액 (고정공식) -->
   <div class="card">
     <h3>🔁 유지수액</h3>
-    <div class="hint" style="margin-bottom:6px">공식: <strong>80 × kg^0.75 / day</strong> → Maint(ml/h) = (80 × kg^0.75) / 24</div>
+    <div class="hint" style="margin-bottom:6px"> Maint(ml/h) = (80 × kg^0.75) / 24</div>
     <div class="row">
       <div class="ibox">
         <label>유지속도 (mL/h)</label>
@@ -208,3 +208,4 @@
 </script>
 </body>
 </html>
+
