@@ -46,66 +46,71 @@
   </div>
 
   <!-- 2) 탈수 (선택입력) -->
-  <div class="card">
-    <h3>💧 탈수교정 <span class="small">(선택입력)</span>
-      <label style="display:flex;align-items:center;gap:6px;font-weight:normal;font-size:.9rem">
-        <input id="noDehy" type="checkbox" checked>
+  <details class="card" id="dehySection">
+    <summary style="cursor:pointer;color:#1d4ed8;font-weight:500;display:flex;align-items:center;gap:12px">💧 탈수교정 (선택입력)
+      <label style='display:flex;align-items:center;gap:4px;font-weight:normal;font-size:.8rem;'>
+        <input type="radio" name="dehyOpt" id="optNone" checked>
         <span>탈수 없음</span>
       </label>
-    </h3>
-    <div class="row">
-      <div class="ibox" style="min-width:240px">
-        <label>% 탈수 (5~12%)</label>
-        <div class="slider-wrap">
-          <input id="dehy" type="range" min="5" max="12" step="0.5" value="7">
-          <span id="dehyLab" class="big">7%</span>
+      <label style='display:flex;align-items:center;gap:4px;font-weight:normal;font-size:.8rem;'>
+        <input type="radio" name="dehyOpt" id="optYes">
+        <span>탈수 있음</span>
+      </label>
+    </summary>
+    <div id="dehyContent" style="margin-top:10px;display:none">
+      <div class="row">
+        <div class="ibox" style="min-width:240px">
+          <label>% 탈수 (5~12%)</label>
+          <div class="slider-wrap">
+            <input id="dehy" type="range" min="5" max="12" step="1" value="7">
+            <span id="dehyLab" class="big">7%</span>
+          </div>
+          <div class="hint">결핍량 = 체중 × (%/100) × 1000</div>
         </div>
-        <div class="hint">결핍량 = 체중 × (%/100) × 1000</div>
-      </div>
-      <div class="ibox" style="min-width:260px">
-        <label>교정 시간</label>
-        <div class="pillbar" id="rtBtns">
-          <div class="pill" data-h="6">6 h</div>
-          <div class="pill" data-h="12">12 h</div>
-          <div class="pill" data-h="18">18 h</div>
-          <div class="pill active" data-h="24">24 h</div>
+        <div class="ibox" style="min-width:260px">
+          <label>교정 시간</label>
+          <div class="pillbar" id="rtBtns">
+            <div class="pill" data-h="6">6 h</div>
+            <div class="pill" data-h="12">12 h</div>
+            <div class="pill" data-h="18">18 h</div>
+            <div class="pill active" data-h="24">24 h</div>
+          </div>
+          <div class="hint">버튼 탭으로 보충시간 선택</div>
         </div>
-        <div class="hint">버튼 탭으로 보충시간 선택</div>
       </div>
-    </div>
-    <div class="split"></div>
-    <div class="row">
-      <div class="ibox">
-        <label>결핍량 (mL)</label>
-        <div id="deficit" class="big">-</div>
+      <div class="split"></div>
+      <div class="row">
+        <div class="ibox">
+          <label>결핍량 (mL)</label>
+          <div id="deficit" class="big">-</div>
+        </div>
+        <div class="ibox">
+          <label>교정속도 (mL/h)</label>
+          <div id="deficitHr" class="big">-</div>
+        </div>
       </div>
-      <div class="ibox">
-        <label>교정속도 (mL/h)</label>
-        <div id="deficitHr" class="big">-</div>
-      </div>
-    </div>
 
-    <!-- 탈수율 가이드: 기본 닫힘 -->
-    <details style="margin-top:10px">
-      <summary style="cursor:pointer;color:#374151;font-weight:400;font-size:0.9rem">
-        신체검사 상 추정 탈수율 가이드 (열기)
-      </summary>
-      <div class="note" style="margin-top:8px">
-        <ul style="margin:6px 0 0 18px">
-          <li><strong>&lt;5%</strong> — <strong>임상적으로 감지 어려움</strong></li>
-          <li><strong>5~6%</strong> — 피부 긴장도 <strong>약간 변화</strong></li>
-          <li><strong>6~8%</strong> — 피부 긴장도 경미하게 감소, <strong>점막 건조</strong></li>
-          <li><strong>8~10%</strong> — 피부 긴장도 <strong>명확히 감소</strong>, <strong>안구 함몰</strong></li>
-          <li><strong>10~12%</strong> — 피부 탄력 <strong>거의 소실</strong>로 <strong>지속적 텐팅</strong>, <strong>각막 혼탁</strong>, <strong>저혈량증 소견</strong></li>
-          <li><strong>&gt;12%</strong> — <strong>저혈량성 쇼크</strong>, <strong>생명 위협</strong> 가능</li>
-        </ul>
-        <div style="margin-top:8px">
-          <em>참고:</em> 임상 소견과 실제 탈수율의 상관에는 개인차가 커서 이 표는 <strong>추정치</strong>입니다.
+      <!-- 탈수율 가이드: 기본 닫힘 -->
+      <details style="margin-top:10px">
+        <summary style="cursor:pointer;color:#374151;font-weight:400;font-size:0.9rem">
+          신체검사 상 추정 탈수율 가이드 (열기)
+        </summary>
+        <div class="note" style="margin-top:8px">
+          <ul style="margin:6px 0 0 18px">
+            <li><strong>&lt;5%</strong> — <strong>임상적으로 감지 어려움</strong></li>
+            <li><strong>5~6%</strong> — 피부 긴장도 <strong>약간 변화</strong></li>
+            <li><strong>6~8%</strong> — 피부 긴장도 경미하게 감소, <strong>점막 건조</strong></li>
+            <li><strong>8~10%</strong> — 피부 긴장도 <strong>명확히 감소</strong>, <strong>안구 함몰</strong></li>
+            <li><strong>10~12%</strong> — 피부 탄력 <strong>거의 소실</strong>로 <strong>지속적 텐팅</strong>, <strong>각막 혼탁</strong>, <strong>저혈량증 소견</strong></li>
+            <li><strong>&gt;12%</strong> — <strong>저혈량성 쇼크</strong>, <strong>생명 위협</strong> 가능</li>
+          </ul>
+          <div style="margin-top:8px">
+            <em>참고:</em> 임상 소견과 실제 탈수율의 상관에는 개인차가 커서 이 표는 <strong>추정치</strong>입니다.
+          </div>
         </div>
-      </div>
-    </details>
-
-  </div>
+      </details>
+    </div>
+  </details>
 
   <!-- 3) 유지수액 (고정공식) -->
   <div class="card">
@@ -150,11 +155,13 @@
   const $ = (id)=>document.getElementById(id);
   const fmt = (x,d=0)=> (isNaN(x)? '-' : Number(x).toFixed(d));
 
-  const bw=$('bw'), dehy=$('dehy'), dehyLab=$('dehyLab'), noDehy=$('noDehy');
+  const bw=$('bw'), dehy=$('dehy'), dehyLab=$('dehyLab');
   const rtBtns=$('rtBtns');
   const deficit=$('deficit'), deficitHr=$('deficitHr');
   const maint=$('maint'), ongoing=$('ongoing');
   const rateInit=$('rateInit'), rateAfter=$('rateAfter');
+  const dehyContent=$('dehyContent');
+  const optNone=$('optNone'), optYes=$('optYes');
 
   let replH = 24;
   rtBtns.querySelectorAll('.pill').forEach(p=>{
@@ -178,7 +185,7 @@
     }
 
     let deficitMl=0, deficitPerHr=0;
-    if(!noDehy.checked){
+    if(optYes.checked){
       dehyLab.textContent = `${dehy.value}%`;
       deficitMl = BW * (parseFloat(dehy.value)/100) * 1000;
       deficitPerHr = deficitMl / replH;
@@ -201,7 +208,22 @@
   }
 
   ['input','change'].forEach(evt=>{
-    [bw,dehy,ongoing,noDehy].forEach(el=> el.addEventListener(evt, recalcAll));
+    [bw,dehy,ongoing].forEach(el=> el.addEventListener(evt, recalcAll));
+  });
+
+  optNone.addEventListener('change',()=>{
+    if(optNone.checked){
+      dehyContent.style.display='none';
+      recalcAll();
+    }
+  });
+
+  optYes.addEventListener('change',()=>{
+    if(optYes.checked){
+      dehyContent.style.display='block';
+      document.getElementById('dehySection').setAttribute('open','');
+      recalcAll();
+    }
   });
 
   recalcAll();
